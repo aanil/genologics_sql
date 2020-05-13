@@ -12,7 +12,7 @@ def get_configuration():
     for fn in [os.path.expanduser('~/.genosqlrc.yaml'), '.genosqlrc.yaml']:
         if os.path.exists(fn):
             with open(fn) as f :
-                return yaml.load(f)
+                return yaml.safe_load(f)
     raise Exception("Cannot find a valid configuration file. Please read the README.md.")
 
 def get_engine():
