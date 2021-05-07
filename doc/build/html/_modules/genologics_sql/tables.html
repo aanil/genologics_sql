@@ -6,34 +6,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>genologics_sql.tables &mdash; genologics-sql 0.0.1 documentation</title>
-  
 
-  
-  
+  <title>genologics_sql.tables &mdash; genologics-sql 1.0.0 documentation</title>
 
-  
+
+
+
+
+
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
-  
-  
-    
 
-  
 
-  
-  
+
+
+
+
+
+
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
 
-  
 
-  
-    <link rel="top" title="genologics-sql 0.0.1 documentation" href="../../index.html"/>
-        <link rel="up" title="Module code" href="../index.html"/> 
 
-  
+
+
+    <link rel="top" title="genologics-sql 1.0.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/>
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 
 </head>
@@ -42,13 +42,13 @@
 
   <div class="wy-grid-for-nav">
 
-    
+
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        
+
           <a href="../../index.html" class="fa fa-home"> genologics-sql</a>
-        
-        
+
+
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -59,47 +59,47 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-          
-          
+
+
+
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tables.html">Tables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../queries.html">Queries</a></li>
 </ul>
 
-          
-        
+
+
       </div>
       &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
-      
+
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
         <a href="../../index.html">genologics-sql</a>
       </nav>
 
 
-      
+
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+
           <li><a href="../index.html">Module code</a> &raquo;</li>
-      
+
     <li>genologics_sql.tables</li>
       <li class="wy-breadcrumbs-aside">
-        
+
       </li>
   </ul>
   <hr/>
 </div>
           <div role="main" class="document">
-            
+
   <h1>Source code for genologics_sql.tables</h1><div class="highlight"><pre>
 <span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">relationship</span>
@@ -123,7 +123,7 @@
 <span class="sd">&quot;&quot;&quot;Junction table between artifact and artifact (as an ancestor)&quot;&quot;&quot;</span>
 
 
-<span class="n">artifact_label_map</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s">&#39;artifact_label_map&#39;</span><span class="p">,</span> <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span> 
+<span class="n">artifact_label_map</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s">&#39;artifact_label_map&#39;</span><span class="p">,</span> <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span>
                     <span class="n">Column</span><span class="p">(</span><span class="s">&#39;artifactid&#39;</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;artifact.artifactid&#39;</span><span class="p">)),</span>
                     <span class="n">Column</span><span class="p">(</span><span class="s">&#39;labelid&#39;</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;reagentlabel.labelid&#39;</span><span class="p">)))</span>
 <span class="sd">&quot;&quot;&quot;Junction table between artifact and reagentlabel)&quot;&quot;&quot;</span>
@@ -146,10 +146,10 @@
 <span class="sd">    All of these are mapped as primary keys.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;entity_udf_view&#39;</span>
-    <span class="n">attachtoid</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>     
+    <span class="n">attachtoid</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">attachtoclassid</span> <span class="o">=</span>   <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udtname</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">udfname</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> 
+    <span class="n">udfname</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udftype</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udfvalue</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udfunitlabel</span> <span class="o">=</span>      <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -185,19 +185,19 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;project&#39;</span>
     <span class="n">projectid</span> <span class="o">=</span>         <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">name</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>    
-    <span class="n">opendate</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span> 
+    <span class="n">name</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">opendate</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
     <span class="n">closedate</span> <span class="o">=</span>         <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
     <span class="n">invoicedate</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
-    <span class="n">luid</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>   
+    <span class="n">luid</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
     <span class="n">maximumsampleid</span> <span class="o">=</span>   <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
-    <span class="n">ownerid</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span> 
-    <span class="n">datastoreid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span> 
-    <span class="n">isglobal</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>   
+    <span class="n">ownerid</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">datastoreid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">isglobal</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
     <span class="n">createddate</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
     <span class="n">lastmodifieddate</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
-    <span class="n">lastmodifiedby</span> <span class="o">=</span>    <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span> 
-    <span class="n">researcherid</span> <span class="o">=</span>      <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;researcher.researcherid&#39;</span><span class="p">))</span> 
+    <span class="n">lastmodifiedby</span> <span class="o">=</span>    <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">researcherid</span> <span class="o">=</span>      <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;researcher.researcherid&#39;</span><span class="p">))</span>
     <span class="n">priority</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
 
     <span class="c">#this is the reason why udfview was declared before project</span>
@@ -232,10 +232,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;sample&#39;</span>
     <span class="n">processid</span> <span class="o">=</span>         <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;process.processid&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">sampleid</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>    
-    <span class="n">name</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>    
-    <span class="n">datereceived</span> <span class="o">=</span>      <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span> 
-    <span class="n">datecompleted</span> <span class="o">=</span>     <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span> 
+    <span class="n">sampleid</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">datereceived</span> <span class="o">=</span>      <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
+    <span class="n">datecompleted</span> <span class="o">=</span>     <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
     <span class="n">maximumanalyteid</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">uniqueid</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">bisourceid</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
@@ -341,16 +341,16 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;process&#39;</span>
     <span class="n">processid</span> <span class="o">=</span>         <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">daterun</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>    
-    <span class="n">luid</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>    
-    <span class="n">isprotocol</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>    
+    <span class="n">daterun</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
+    <span class="n">luid</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">isprotocol</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
     <span class="n">protocolnameused</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
     <span class="n">programstarted</span> <span class="o">=</span>    <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
     <span class="n">datastoreid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">isglobal</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
     <span class="n">ownerid</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
-    <span class="n">createddate</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>    
-    <span class="n">lastmodifieddate</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>    
+    <span class="n">createddate</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
+    <span class="n">lastmodifieddate</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
     <span class="n">lastmodifiedby</span> <span class="o">=</span>    <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">installationid</span> <span class="o">=</span>    <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">techid</span> <span class="o">=</span>            <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
@@ -430,8 +430,8 @@
     <span class="n">outputindex</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
 
     <span class="n">samples</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">&quot;Sample&quot;</span><span class="p">,</span> <span class="n">secondary</span> <span class="o">=</span> <span class="n">artifact_sample_map</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&quot;artifacts&quot;</span><span class="p">)</span>
-    <span class="n">ancestors</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">&quot;Artifact&quot;</span><span class="p">,</span> <span class="n">secondary</span> <span class="o">=</span> <span class="n">artifact_ancestor_map</span><span class="p">,</span> 
-                <span class="n">primaryjoin</span><span class="o">=</span><span class="n">artifactid</span><span class="o">==</span><span class="n">artifact_ancestor_map</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">artifactid</span><span class="p">,</span> 
+    <span class="n">ancestors</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">&quot;Artifact&quot;</span><span class="p">,</span> <span class="n">secondary</span> <span class="o">=</span> <span class="n">artifact_ancestor_map</span><span class="p">,</span>
+                <span class="n">primaryjoin</span><span class="o">=</span><span class="n">artifactid</span><span class="o">==</span><span class="n">artifact_ancestor_map</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">artifactid</span><span class="p">,</span>
                 <span class="n">secondaryjoin</span><span class="o">=</span><span class="n">artifactid</span><span class="o">==</span><span class="n">artifact_ancestor_map</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">ancestorartifactid</span><span class="p">)</span>
     <span class="n">udfs</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">&quot;ArtifactUdfView&quot;</span><span class="p">)</span>
     <span class="n">containerplacement</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">&#39;ContainerPlacement&#39;</span><span class="p">,</span> <span class="n">uselist</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&#39;artifact&#39;</span><span class="p">)</span>
@@ -451,9 +451,9 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;artifact_udf_view&#39;</span>
-    <span class="n">artifactid</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;artifact.artifactid&#39;</span><span class="p">)</span> <span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>     
+    <span class="n">artifactid</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;artifact.artifactid&#39;</span><span class="p">)</span> <span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udtname</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">udfname</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> 
+    <span class="n">udfname</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udftype</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udfvalue</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udfunitlabel</span> <span class="o">=</span>      <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -474,10 +474,10 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;process_udf_view&#39;</span>
-    <span class="n">processid</span> <span class="o">=</span>         <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;process.processid&#39;</span><span class="p">)</span> <span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>     
+    <span class="n">processid</span> <span class="o">=</span>         <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;process.processid&#39;</span><span class="p">)</span> <span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">typeid</span> <span class="o">=</span>            <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;processtype.typeid&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udtname</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">udfname</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> 
+    <span class="n">udfname</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udftype</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udfvalue</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">udfunitlabel</span> <span class="o">=</span>      <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -509,7 +509,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;containerplacement&#39;</span>
-    <span class="n">placementid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>     
+    <span class="n">placementid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">containerid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;container.containerid&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">wellxposition</span> <span class="o">=</span>     <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">wellyposition</span> <span class="o">=</span>     <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
@@ -554,19 +554,19 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;container&#39;</span>
-    <span class="n">containerid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>     
-    <span class="n">subtype</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>     
-    <span class="n">luid</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>     
-    <span class="n">isvisible</span> <span class="o">=</span>         <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>     
-    <span class="n">name</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>     
-    <span class="n">ownerid</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>     
-    <span class="n">datastoreid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>     
-    <span class="n">isglobal</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>     
+    <span class="n">containerid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">subtype</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">luid</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">isvisible</span> <span class="o">=</span>         <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">ownerid</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">datastoreid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">isglobal</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
     <span class="n">createddate</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
     <span class="n">lastmodifieddate</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
     <span class="n">lastmodifiedby</span> <span class="o">=</span>    <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
-    <span class="n">stateid</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>     
-    <span class="n">typeid</span> <span class="o">=</span>            <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>     
+    <span class="n">stateid</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">typeid</span> <span class="o">=</span>            <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">lotnumber</span> <span class="o">=</span>         <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
     <span class="n">expirydate</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
 
@@ -594,16 +594,16 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;reagentlabel&#39;</span>
-    <span class="n">labelid</span><span class="o">=</span>            <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>     
-    <span class="n">name</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>     
-    <span class="n">ownerid</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>     
-    <span class="n">datastoreid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>     
-    <span class="n">isglobal</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>     
-    <span class="n">createddate</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span> 
-    <span class="n">lastmodifieddate</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span> 
-    <span class="n">lastmodifiedby</span> <span class="o">=</span>    <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span> 
+    <span class="n">labelid</span><span class="o">=</span>            <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">ownerid</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">datastoreid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">isglobal</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">createddate</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
+    <span class="n">lastmodifieddate</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
+    <span class="n">lastmodifiedby</span> <span class="o">=</span>    <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
 
-    <span class="n">artifacts</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">&quot;Artifact&quot;</span><span class="p">,</span> <span class="n">secondary</span> <span class="o">=</span> <span class="n">artifact_label_map</span><span class="p">,</span> 
+    <span class="n">artifacts</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">&quot;Artifact&quot;</span><span class="p">,</span> <span class="n">secondary</span> <span class="o">=</span> <span class="n">artifact_label_map</span><span class="p">,</span>
                 <span class="n">backref</span><span class="o">=</span><span class="s">&#39;reagentlabels&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -626,7 +626,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;analyte&#39;</span>
-    <span class="n">artifactid</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;artifact.artifactid&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>     
+    <span class="n">artifactid</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;artifact.artifactid&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">analyteid</span> <span class="o">=</span>         <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">iscalibrant</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
     <span class="n">sequencenumber</span> <span class="o">=</span>    <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
@@ -655,7 +655,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;resultfile&#39;</span>
-    <span class="n">artifactid</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;artifact.artifactid&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>     
+    <span class="n">artifactid</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;artifact.artifactid&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">fileid</span> <span class="o">=</span>            <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
     <span class="nb">type</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
     <span class="n">parsestatus</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
@@ -699,9 +699,9 @@
     <span class="n">luid</span> <span class="o">=</span>              <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
     <span class="n">originallocation</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
     <span class="n">ispublished</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
-    <span class="n">ownerid</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>     
-    <span class="n">datastoreid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>     
-    <span class="n">isglobal</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>     
+    <span class="n">ownerid</span> <span class="o">=</span>           <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">datastoreid</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">isglobal</span> <span class="o">=</span>          <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
     <span class="n">createddate</span> <span class="o">=</span>       <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
     <span class="n">lastmodifieddate</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">TIMESTAMP</span><span class="p">)</span>
     <span class="n">lastmodifiedby</span> <span class="o">=</span>    <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
@@ -709,7 +709,7 @@
     <span class="n">attachtoclassid</span> <span class="o">=</span>   <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
 
     <span class="nb">file</span><span class="o">=</span><span class="n">relationship</span><span class="p">(</span><span class="s">&quot;ResultFile&quot;</span><span class="p">,</span><span class="n">uselist</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&quot;glsfile&quot;</span><span class="p">)</span>
-    
+
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&quot;&lt;GlsFile(id={})&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fileid</span><span class="p">)</span>
 </div>
@@ -761,16 +761,16 @@
     <span class="n">email</span> <span class="o">=</span>             <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
     <span class="n">fax</span> <span class="o">=</span>               <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
     <span class="n">addressid</span> <span class="o">=</span>         <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
-    <span class="n">labid</span> <span class="o">=</span>             <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span> 
-    <span class="n">supervisorid</span> <span class="o">=</span>      <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span> 
-    <span class="n">isapproved</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span> 
-    <span class="n">requestedsupervisorfirstname</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span> 
-    <span class="n">requestedsupervisorlastname</span> <span class="o">=</span>   <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span> 
-    <span class="n">requestedusername</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span> 
-    <span class="n">requestedpassword</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span> 
-    <span class="n">requestedlabname</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span> 
-    <span class="n">avatar</span> <span class="o">=</span>            <span class="n">Column</span><span class="p">(</span><span class="n">LargeBinary</span><span class="p">)</span> 
-    <span class="n">avatarcontenttype</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span> 
+    <span class="n">labid</span> <span class="o">=</span>             <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">supervisorid</span> <span class="o">=</span>      <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">isapproved</span> <span class="o">=</span>        <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">requestedsupervisorfirstname</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">requestedsupervisorlastname</span> <span class="o">=</span>   <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">requestedusername</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">requestedpassword</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">requestedlabname</span> <span class="o">=</span>  <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">avatar</span> <span class="o">=</span>            <span class="n">Column</span><span class="p">(</span><span class="n">LargeBinary</span><span class="p">)</span>
+    <span class="n">avatarcontenttype</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&quot;&lt;Researcher(id={}, name={} {}, initials={})&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">researcherid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">firstname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lastname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">initials</span><span class="p">)</span>
@@ -841,7 +841,7 @@
     <span class="n">lastmodifiedby</span>  <span class="o">=</span>   <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
 
     <span class="n">event</span><span class="o">=</span><span class="n">relationship</span><span class="p">(</span><span class="s">&quot;EscalationEvent&quot;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&quot;escalatedsamples&quot;</span><span class="p">)</span>
-    
+
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&quot;&lt;EscalatedSample(id={}, artifact={})&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">escalatedsampleid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">artifactid</span><span class="p">)</span></div>
@@ -849,7 +849,7 @@
 
           </div>
           <footer>
-  
+
 
   <hr/>
 
@@ -860,7 +860,7 @@
   </div>
 
   Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-  
+
 </footer>
         </div>
       </div>
@@ -868,15 +868,15 @@
     </section>
 
   </div>
-  
 
 
-  
+
+
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.0.1',
+            VERSION:'1.0.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -886,21 +886,21 @@
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
 
-  
 
-  
-  
+
+
+
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
 
-  
-  
+
+
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.StickyNav.enable();
       });
   </script>
-   
+
 
 </body>
 </html>

@@ -1,3 +1,9 @@
+try:
+    import tables
+except ImportError:
+    from . import tables
 
-import tables
-import queries
+try:
+    import queries
+except ImportError:
+    from . import queries
