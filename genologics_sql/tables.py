@@ -21,14 +21,14 @@ artifact_ancestor_map = Table('artifact_ancestor_map', Base.metadata,
 """Junction table between artifact and artifact (as an ancestor)"""
 
 
-artifact_label_map = Table('artifact_label_map', Base.metadata, 
+artifact_label_map = Table('artifact_label_map', Base.metadata,
                     Column('artifactid', Integer, ForeignKey('artifact.artifactid')),
                     Column('labelid', Integer, ForeignKey('reagentlabel.labelid')))
 """Junction table between artifact and reagentlabel)"""
 
 #Standard tables
 
-#udf view has to be before project 
+#udf view has to be before project
 class EntityUdfView(Base):
     """Table used to access project and container udfs
 
@@ -44,10 +44,10 @@ class EntityUdfView(Base):
     All of these are mapped as primary keys.
     """
     __tablename__ = 'entity_udf_view'
-    attachtoid =        Column(Integer, primary_key=True)     
+    attachtoid =        Column(Integer, primary_key=True)
     attachtoclassid =   Column(Integer, primary_key=True)
     udtname =           Column(String, primary_key=True)
-    udfname =           Column(String, primary_key=True) 
+    udfname =           Column(String, primary_key=True)
     udftype =           Column(String, primary_key=True)
     udfvalue =          Column(String, primary_key=True)
     udfunitlabel =      Column(String, primary_key=True)
@@ -59,43 +59,43 @@ class EntityUdfView(Base):
 class Project(Base):
     """Table storing project objects
 
-    :arg INTEGER projectid: the _internal_ project ID. **Primary key.** 
-    :arg STRING name: the project name. 
-    :arg TIMESTAMP opendate: the opening date of the project as a timestamp. 
-    :arg TIMESTAMP closedate: the closing date of the project as a timestamp. 
-    :arg TIMESTAMP invoicedate: the invoicing date of the project as a timestamp. 
-    :arg STRING luid: the external project id. 
-    :arg STRING maximumsampleid: the id of the last sample. usually, nb of samples-1, as it's 0 indexed. 
-    :arg INTEGER ownerid: researcherID of the project owner. 
+    :arg INTEGER projectid: the _internal_ project ID. **Primary key.**
+    :arg STRING name: the project name.
+    :arg TIMESTAMP opendate: the opening date of the project as a timestamp.
+    :arg TIMESTAMP closedate: the closing date of the project as a timestamp.
+    :arg TIMESTAMP invoicedate: the invoicing date of the project as a timestamp.
+    :arg STRING luid: the external project id.
+    :arg STRING maximumsampleid: the id of the last sample. usually, nb of samples-1, as it's 0 indexed.
+    :arg INTEGER ownerid: researcherID of the project owner.
     :arg INTEGER datastoreid: probably used to map the udfs
     :arg INTEGER isglobal: *unkown*
-    :arg TIMESTAMP createddate: the creation date of the project as a timestamp. 
-    :arg TIMESTAMP lastmodifieddate: the last modification date of the project as a timestamp. 
-    :arg INTEGER lastmodifiedby: the id of the last modifier of the project. 
-    :arg INTEGER researcherid: the id of the researcher associated to the project. 
+    :arg TIMESTAMP createddate: the creation date of the project as a timestamp.
+    :arg TIMESTAMP lastmodifieddate: the last modification date of the project as a timestamp.
+    :arg INTEGER lastmodifiedby: the id of the last modifier of the project.
+    :arg INTEGER researcherid: the id of the researcher associated to the project.
     :arg INTEGER priority: *unknown*
 
     The following attributes are *not* found in the table, but are available through mapping
 
-    :arg UDFS udfs: list of project udf rows for the given projectid 
+    :arg UDFS udfs: list of project udf rows for the given projectid
     :arg RESEARCHER researcher: direct researcher mapping
 
     """
     __tablename__ = 'project'
     projectid =         Column(Integer, primary_key=True)
-    name =              Column(String)    
-    opendate =          Column(TIMESTAMP) 
+    name =              Column(String)
+    opendate =          Column(TIMESTAMP)
     closedate =         Column(TIMESTAMP)
     invoicedate =       Column(TIMESTAMP)
-    luid =              Column(String)   
+    luid =              Column(String)
     maximumsampleid =   Column(String)
-    ownerid =           Column(Integer) 
-    datastoreid =       Column(Integer) 
-    isglobal =          Column(Boolean)   
+    ownerid =           Column(Integer)
+    datastoreid =       Column(Integer)
+    isglobal =          Column(Boolean)
     createddate =       Column(TIMESTAMP)
     lastmodifieddate =  Column(TIMESTAMP)
-    lastmodifiedby =    Column(Integer) 
-    researcherid =      Column(Integer, ForeignKey('researcher.researcherid')) 
+    lastmodifiedby =    Column(Integer)
+    researcherid =      Column(Integer, ForeignKey('researcher.researcherid'))
     priority =          Column(Integer)
 
     #this is the reason why udfview was declared before project
@@ -136,9 +136,9 @@ class SampleUdfView(Base):
     All of these are mapped as primary keys.
     """
     __tablename__ = 'sample_udf_view'
-    sampleid =          Column(Integer, ForeignKey('sample.sampleid'), primary_key=True)     
+    sampleid =          Column(Integer, ForeignKey('sample.sampleid'), primary_key=True)
     udtname =           Column(String, primary_key=True)
-    udfname =           Column(String, primary_key=True) 
+    udfname =           Column(String, primary_key=True)
     udftype =           Column(String, primary_key=True)
     udfvalue =          Column(String, primary_key=True)
     udfunitlabel =      Column(String, primary_key=True)
@@ -157,8 +157,8 @@ class Sample(Base):
     :arg TIMESTAMP datereceived: timestamp of the sample import.
     :arg TIMESTAMP datecompleted: timestamp of the project closure / sample completion.
     :arg INTEGER maximumanalyteid: *unknown*
-    :arg INTEGER uniqueid: *unknown*. Not unique. 
-    :arg INTEGER bisourceid: *unknown*. 
+    :arg INTEGER uniqueid: *unknown*. Not unique.
+    :arg INTEGER bisourceid: *unknown*.
     :arg INTEGER projectid:  projet ID associated to the sample.
     :arg INTEGER controltypeid: *unknown*.
 
@@ -169,10 +169,10 @@ class Sample(Base):
     """
     __tablename__ = 'sample'
     processid =         Column(Integer, ForeignKey('process.processid'), primary_key=True)
-    sampleid =          Column(Integer)    
-    name =              Column(String)    
-    datereceived =      Column(TIMESTAMP) 
-    datecompleted =     Column(TIMESTAMP) 
+    sampleid =          Column(Integer)
+    name =              Column(String)
+    datereceived =      Column(TIMESTAMP)
+    datecompleted =     Column(TIMESTAMP)
     maximumanalyteid =  Column(Integer)
     uniqueid =          Column(Integer)
     bisourceid =        Column(Integer)
@@ -203,7 +203,7 @@ class Sample(Base):
                     udf_dict[udfrow.udfname]=(udfrow.udfvalue=="True")
                 else:
                     udf_dict[udfrow.udfname]=udfrow.udfvalue
-                
+
         return udf_dict
 
     def __repr__(self):
@@ -219,23 +219,23 @@ class ProcessType(Base):
     :arg BOOLEAN isenabled: Probably related to the tickbox in the Operations interface
     :arg STRING contextcode: The short code (usually 3 letters) that represents the type
     :arg BOOLEAN isvisible: *unknown*
-    :arg INTEGER style: *unknown* 
-    :arg BOOLEANshowinexplorer: *unknown* 
+    :arg INTEGER style: *unknown*
+    :arg BOOLEANshowinexplorer: *unknown*
     :arg BOOLEAN showinbuttonbar: *unknown*
-    :arg BOOLEAN openpostprocess: *unknown* 
+    :arg BOOLEAN openpostprocess: *unknown*
     :arg STRING iconconstant: *unknown*
     :arg STRING outputcontextcode: *unknown*. Apparently, a two-letter code.
-    :arg BOOLEAN useprotocol: *unknown* 
+    :arg BOOLEAN useprotocol: *unknown*
     :arg INTEGER ownerid: Researcher ID of the owner of the type. Should correlate to the Researcher table.
-    :arg INTEGER datastoreid: likely related to the udf storage 
-    :arg BOOLEAN isglobal: *unknown* 
+    :arg INTEGER datastoreid: likely related to the udf storage
+    :arg BOOLEAN isglobal: *unknown*
     :arg TIMESTAMP createddate: creation date
-    :arg TIMESTAMP lastmodifieddate: timestamp of the last modification 
-    :arg INTEGER lastmodifiedby: ID of the last modifier 
+    :arg TIMESTAMP lastmodifieddate: timestamp of the last modification
+    :arg INTEGER lastmodifiedby: ID of the last modifier
     :arg STRING behaviourname: *unknown*
     :arg STRING pmetadata: html string likely containing display data. The actual column name is metadata, but that causes namespace conflicts.
     :arg BOOLEAN canedit: is that type editable
-    :arg STRING modulename: Java module tied to this type 
+    :arg STRING modulename: Java module tied to this type
     :arg STRING expertname: Java class tied to this type
 
     """
@@ -271,11 +271,11 @@ class ProcessType(Base):
 class Process(Base):
     """Table mapping process objects
 
-    :arg INTEGER processid: the (short) process ID. **Primary key.** 
-    :arg TIMESTAMP daterun: date where the process was closed 
+    :arg INTEGER processid: the (short) process ID. **Primary key.**
+    :arg TIMESTAMP daterun: date where the process was closed
     :arg STRING luid: the (long) process id
     :arg BOOLEAN isprotocol: *unknown*
-    :arg STRING protocolnameused: *unknown* 
+    :arg STRING protocolnameused: *unknown*
     :arg BOOLEAN programstarted: probably stores EPP status
     :arg INTEGER datastoreid: id of the associated datastore
     :arg BOOLEAN isglobal: *unknown*
@@ -303,16 +303,16 @@ class Process(Base):
     """
     __tablename__ = 'process'
     processid =         Column(Integer, primary_key=True)
-    daterun =           Column(TIMESTAMP)    
-    luid =              Column(String)    
-    isprotocol =        Column(Boolean)    
+    daterun =           Column(TIMESTAMP)
+    luid =              Column(String)
+    isprotocol =        Column(Boolean)
     protocolnameused =  Column(String)
     programstarted =    Column(Boolean)
     datastoreid =       Column(Integer)
     isglobal =          Column(Boolean)
     ownerid =           Column(Integer)
-    createddate =       Column(TIMESTAMP)    
-    lastmodifieddate =  Column(TIMESTAMP)    
+    createddate =       Column(TIMESTAMP)
+    lastmodifieddate =  Column(TIMESTAMP)
     lastmodifiedby =    Column(Integer)
     installationid =    Column(Integer)
     techid =            Column(Integer, ForeignKey('principals.principalid'))
@@ -344,13 +344,13 @@ class Process(Base):
                     udf_dict[udfrow.udfname]=(udfrow.udfvalue=="True")
                 else:
                     udf_dict[udfrow.udfname]=udfrow.udfvalue
-                
+
         return udf_dict
 
 class Artifact(Base):
     """Table mapping artifact objects
 
-    :arg INTEGER artifactid: the (short) artifact ID. **Primary key.** 
+    :arg INTEGER artifactid: the (short) artifact ID. **Primary key.**
     :arg STRING name: the artifact given name
     :arg STRING luid: the (long) artifact id
     :arg FLOAT concentration: *unknown*
@@ -410,8 +410,8 @@ class Artifact(Base):
     outputindex =       Column(Integer)
 
     samples = relationship("Sample", secondary = artifact_sample_map, backref="artifacts")
-    ancestors = relationship("Artifact", secondary = artifact_ancestor_map, 
-                primaryjoin=artifactid==artifact_ancestor_map.c.artifactid, 
+    ancestors = relationship("Artifact", secondary = artifact_ancestor_map,
+                primaryjoin=artifactid==artifact_ancestor_map.c.artifactid,
                 secondaryjoin=artifactid==artifact_ancestor_map.c.ancestorartifactid)
     udfs = relationship("ArtifactUdfView")
     states = relationship("ArtifactState", backref='artifact')
@@ -429,7 +429,7 @@ class Artifact(Base):
                     udf_dict[udfrow.udfname]=(udfrow.udfvalue=="True")
                 else:
                     udf_dict[udfrow.udfname]=udfrow.udfvalue
-                
+
         return udf_dict
 
     @hybrid_property
@@ -461,9 +461,9 @@ class ArtifactUdfView(Base):
 
     """
     __tablename__ = 'artifact_udf_view'
-    artifactid =        Column(Integer, ForeignKey('artifact.artifactid') , primary_key=True)     
+    artifactid =        Column(Integer, ForeignKey('artifact.artifactid') , primary_key=True)
     udtname =           Column(String, primary_key=True)
-    udfname =           Column(String, primary_key=True) 
+    udfname =           Column(String, primary_key=True)
     udftype =           Column(String, primary_key=True)
     udfvalue =          Column(String, primary_key=True)
     udfunitlabel =      Column(String, primary_key=True)
@@ -484,10 +484,10 @@ class ProcessUdfView(Base):
 
     """
     __tablename__ = 'process_udf_view'
-    processid =         Column(Integer, ForeignKey('process.processid') , primary_key=True)     
+    processid =         Column(Integer, ForeignKey('process.processid') , primary_key=True)
     typeid =            Column(Integer, ForeignKey('processtype.typeid'), primary_key=True)
     udtname =           Column(String, primary_key=True)
-    udfname =           Column(String, primary_key=True) 
+    udfname =           Column(String, primary_key=True)
     udftype =           Column(String, primary_key=True)
     udfvalue =          Column(String, primary_key=True)
     udfunitlabel =      Column(String, primary_key=True)
@@ -521,7 +521,7 @@ class ContainerPlacement(Base):
 
     """
     __tablename__ = 'containerplacement'
-    placementid =       Column(Integer, primary_key=True)     
+    placementid =       Column(Integer, primary_key=True)
     containerid =       Column(Integer, ForeignKey('container.containerid'), primary_key=True)
     wellxposition =     Column(Integer)
     wellyposition =     Column(Integer)
@@ -595,19 +595,19 @@ class Container(Base):
 
     """
     __tablename__ = 'container'
-    containerid =       Column(Integer, primary_key=True)     
-    subtype =           Column(String)     
-    luid =              Column(String)     
-    isvisible =         Column(Boolean)     
-    name =              Column(String)     
-    ownerid =           Column(Integer)     
-    datastoreid =       Column(Integer)     
-    isglobal =          Column(Boolean)     
+    containerid =       Column(Integer, primary_key=True)
+    subtype =           Column(String)
+    luid =              Column(String)
+    isvisible =         Column(Boolean)
+    name =              Column(String)
+    ownerid =           Column(Integer)
+    datastoreid =       Column(Integer)
+    isglobal =          Column(Boolean)
     createddate =       Column(TIMESTAMP)
     lastmodifieddate =  Column(TIMESTAMP)
     lastmodifiedby =    Column(Integer)
-    stateid =           Column(Integer)     
-    typeid =            Column(Integer, ForeignKey('containertype.typeid'))     
+    stateid =           Column(Integer)
+    typeid =            Column(Integer, ForeignKey('containertype.typeid'))
     lotnumber =         Column(String)
     expirydate =        Column(TIMESTAMP)
 
@@ -688,16 +688,16 @@ class ReagentLabel(Base):
 
     """
     __tablename__ = 'reagentlabel'
-    labelid=            Column(Integer, primary_key=True)     
-    name =              Column(String)     
-    ownerid =           Column(Integer)     
-    datastoreid =       Column(Integer)     
-    isglobal =          Column(Boolean)     
-    createddate =       Column(TIMESTAMP) 
-    lastmodifieddate =  Column(TIMESTAMP) 
-    lastmodifiedby =    Column(Integer) 
+    labelid=            Column(Integer, primary_key=True)
+    name =              Column(String)
+    ownerid =           Column(Integer)
+    datastoreid =       Column(Integer)
+    isglobal =          Column(Boolean)
+    createddate =       Column(TIMESTAMP)
+    lastmodifieddate =  Column(TIMESTAMP)
+    lastmodifiedby =    Column(Integer)
 
-    artifacts = relationship("Artifact", secondary = artifact_label_map, 
+    artifacts = relationship("Artifact", secondary = artifact_label_map,
                 backref='reagentlabels')
 
     def __repr__(self):
@@ -720,7 +720,7 @@ class Analyte(Base):
 
     """
     __tablename__ = 'analyte'
-    artifactid =        Column(Integer, ForeignKey('artifact.artifactid'), primary_key=True)     
+    artifactid =        Column(Integer, ForeignKey('artifact.artifactid'), primary_key=True)
     analyteid =         Column(Integer)
     iscalibrant =       Column(Boolean)
     sequencenumber =    Column(Integer)
@@ -749,7 +749,7 @@ class ResultFile(Base):
 
     """
     __tablename__ = 'resultfile'
-    artifactid =        Column(Integer, ForeignKey('artifact.artifactid'), primary_key=True)     
+    artifactid =        Column(Integer, ForeignKey('artifact.artifactid'), primary_key=True)
     fileid =            Column(Integer)
     type =              Column(String)
     parsestatus =       Column(Integer)
@@ -770,7 +770,7 @@ class GlsFile(Base):
     :arg STRING contenturi: URI to the file
     :arg STRING luid: long file id
     :arg STRING originallocation: original path of the file on the uploader's computer.
-    :arg BOOLEAN ispublished: *unknown* 
+    :arg BOOLEAN ispublished: *unknown*
     :arg INTEGER ownerid: Researcher ID of the file creator
     :arg INTEGER datastoreid: id of the associated datastore
     :arg BOOLEAN isglobal: *unknown*
@@ -793,9 +793,9 @@ class GlsFile(Base):
     luid =              Column(String)
     originallocation =  Column(String)
     ispublished =       Column(Boolean)
-    ownerid =           Column(Integer)     
-    datastoreid =       Column(Integer)     
-    isglobal =          Column(Boolean)     
+    ownerid =           Column(Integer)
+    datastoreid =       Column(Integer)
+    isglobal =          Column(Boolean)
     createddate =       Column(TIMESTAMP)
     lastmodifieddate =  Column(TIMESTAMP)
     lastmodifiedby =    Column(Integer)
@@ -803,7 +803,7 @@ class GlsFile(Base):
     attachtoclassid =   Column(Integer)
 
     file=relationship("ResultFile",uselist=False, backref="glsfile")
-    
+
     def __repr__(self):
         return "<GlsFile(id={})>".format(self.fileid)
 
@@ -811,7 +811,7 @@ class Researcher(Base):
     """ Table mapping Researchers
 
     :arg INTEGER researcherid: internal researcher id. Primary key.
-    :arg INTEGER roleid: internal role id 
+    :arg INTEGER roleid: internal role id
     :arg STRING firstname: First name of the researcher
     :arg STRING lastname: Last name of the researcher
     :arg STRING title: researcher's title, if any
@@ -827,10 +827,7 @@ class Researcher(Base):
     :arg STRING fax: researcher's fax number
     :arg INTEGER addressid: id of the associated Address row. (Not mapped)
     :arg INTEGER labid: id of the associated Lab row. (Not mapped)
-    :arg INTEGER supervisorid: researcher id of the researcher's supervisor
     :arg BOOLEAN isapproved: has been validated as a user
-    :arg STRING requestedsupervisorfirstname: *unknown* 
-    :arg STRING requestedsupervsodlastname: *unknown*
     :arg STRING requestedusername: *unknown*
     :arg STRING requestedpassword: *unknown*
     :arg STRING requestedlabname: *unknown*
@@ -855,16 +852,13 @@ class Researcher(Base):
     email =             Column(String)
     fax =               Column(String)
     addressid =         Column(Integer)
-    labid =             Column(Integer, ForeignKey('lab.labid')) 
-    supervisorid =      Column(Integer) 
+    labid =             Column(Integer, ForeignKey('lab.labid'))
     isapproved =        Column(Boolean) 
-    requestedsupervisorfirstname =  Column(String) 
-    requestedsupervisorlastname =   Column(String) 
-    requestedusername = Column(String) 
-    requestedpassword = Column(String) 
-    requestedlabname =  Column(String) 
-    avatar =            Column(LargeBinary) 
-    avatarcontenttype = Column(String) 
+    requestedusername = Column(String)
+    requestedpassword = Column(String)
+    requestedlabname =  Column(String)
+    avatar =            Column(LargeBinary)
+    avatarcontenttype = Column(String)
 
     lab=relationship("Lab",uselist=False)
 
@@ -873,7 +867,7 @@ class Researcher(Base):
 
 class EscalationEvent(Base):
     """ Table mapping Escalation events
-    
+
     :arg INTEGER eventid: escalation event internal id. Primary Key.
     :arg INTEGER processid: process ID where the escalation took place
     :arg INTEGER originarorid: researcher id of the user requesting a review
@@ -937,7 +931,7 @@ class EscalatedSample(Base):
     lastmodifiedby  =   Column(Integer)
 
     event=relationship("EscalationEvent", backref="escalatedsamples")
-    
+
 
     def __repr__(self):
         return "<EscalatedSample(id={}, artifact={})>".format(self.escalatedsampleid, self.artifactid)
@@ -962,11 +956,11 @@ class ProcessIOTracker(Base):
     The following attributes are *not* found in the table, but are available through mapping
 
     :arg Artifact artifact: artifact row corresponding to the ResultFile row.
-    
+
     """
     __tablename__ = 'processiotracker'
     trackerid =          Column(Integer, primary_key=True)
-    inputvolume =        Column(Float) 
+    inputvolume =        Column(Float)
     inputconcentration = Column(Float)
     inputstatepreid =    Column(Integer)
     inputstatepostid =   Column(Integer)
@@ -1013,7 +1007,7 @@ class ArtifactState(Base):
 
 
 class OutputMapping(Base):
-    """Table mapping the process outputs 
+    """Table mapping the process outputs
 
     :arg INTEGER mappingid: the internal mapping id
     :arg FLOAT outputvolume: *unknown*
@@ -1024,7 +1018,7 @@ class OutputMapping(Base):
     :arg TIMESTAMP createddate: The date of creation
     :arg TIMESTAMP lastmodifieddate: The date of last modification
     :arg INTEGER lastmodifiedby: researcherid of the last modifier
-    :arg INTEGER trackerid: trackerid of the associated processiotracker 
+    :arg INTEGER trackerid: trackerid of the associated processiotracker
     :arg INTEGER outputartifactid: artifactid of the associated artifact
 
     """
@@ -1039,7 +1033,7 @@ class OutputMapping(Base):
     lastmodifieddate =      Column(TIMESTAMP)
     lastmodifiedby =        Column(Integer)
     trackerid =             Column(Integer, ForeignKey('processiotracker.trackerid'))
-    outputartifactid =      Column(Integer, ForeignKey('artifact.artifactid')) 
+    outputartifactid =      Column(Integer, ForeignKey('artifact.artifactid'))
 
     tracker=relationship('ProcessIOTracker', backref='output')
 
@@ -1051,7 +1045,7 @@ class Principals(Base):
 
     :arg INTEGER principalid: internal principal id, primary key
     :arg STRING username: username associated with that row
-    :arg STRING password: hashed password 
+    :arg STRING password: hashed password
     :arg BOOLEAN isvisible: *unknown*
     :arg BOOLEAN isloggedin: flag checking is the user is currently within the system
     :arg INTEGER datastoreid: id of the associated datastore
@@ -1061,9 +1055,9 @@ class Principals(Base):
     :arg TIMESTAMP lastmodifieddate: row last modification date
     :arg INTEGER lastmodifiedby: researcherid of the last modifier
     :arg STRING ldapdn: *unknown*
-    :arg STRING ldapuuid: *unknown* 
-    :arg BOOLEAN accountlocked : *unknown* 
-    :arg INTEGER researcherid: id of the associated researcher row 
+    :arg STRING ldapuuid: *unknown*
+    :arg BOOLEAN accountlocked : *unknown*
+    :arg INTEGER researcherid: id of the associated researcher row
     :arg BOOLEAN locked: *unknown*
 
     """
@@ -1104,7 +1098,7 @@ class Lab(Base):
     :arg INTEGER lastmodifiedby: researcherid of the last modifier
     :arg INTEGER billingadressid: ID of the associated billing address
     :arg INTEGER shippingaddressid: ID of the associated shipping address
-    
+
     """
 
     __tablename__ = "lab"

@@ -22,7 +22,7 @@ def get_engine():
     try:
         uri="postgresql://{user}:{passw}@{url}/{db}".format(user=CONF['username'], passw=CONF.get('password', ''), url=CONF['url'], db=CONF['db'])
     except KeyError as e:
-        raise Exception("The configuration file seems to be missing a required parameter. Please read the README.md. Missing key : {}".format(e.message))
+        raise Exception("The configuration file seems to be missing a required parameter. Please read the README.md. Missing key : {}".format(str(e)))
     return create_engine(uri)
 
 def get_session():
