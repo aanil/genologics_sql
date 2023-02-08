@@ -39,7 +39,7 @@ setup(name='genologics_sql',
 	"Programming Language :: Python",
 	"Topic :: Scientific/Engineering :: Medical Science Apps."
 	],
-      keywords='genologics database postgres',
+      keywords='genologics database postgres clarity lims illumina',
       author='Denis Moreno',
       author_email='milui.galithil@gmail.com',
       maintainer='Denis Moreno',

@@ -1,5 +1,8 @@
 # genologics_sql Version Log
 
+## 20230208.1
+Merge Denis' old changes into main repo. This adds the new table RoutingAction and a new relationship routes with Artifacts.
+
 ## 20220617.1
 Remove queries related with researcher supervisor
 
