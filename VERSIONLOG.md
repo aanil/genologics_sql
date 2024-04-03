@@ -1,5 +1,8 @@
 # genologics_sql Version Log
 
+## 20240403.1
+Add queries for Smartseq3 tables.
+
 ## 20230208.1
 Merge Denis' old changes into main repo. This adds the new table RoutingAction and a new relationship routes with Artifacts.
 

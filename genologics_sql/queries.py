@@ -165,7 +165,7 @@ def get_last_modified_processes(session, ptypes, interval="24 hours"):
     return session.query(Process).from_statement(text(query)).all()
 
 def get_processes_in_history(session, parent_process, ptypes, sample=None):
-    """returns wll the processes that are found in the history of parent_process 
+    """returns all the processes that are found in the history of parent_process
     AND are of type ptypes
 
     :param session: the current SQLAlchemy session to the db
@@ -185,12 +185,12 @@ def get_processes_in_history(session, parent_process, ptypes, sample=None):
     qar.append("where pro2.processid={parent} and pro.typeid in ({typelist}) ")
     if sample:
         qar.append("and asm.processid = {sampleid}".format(sampleid=sample))
-    qar.append(";") 
+    qar.append(";")
     query=''.join(qar).format(parent=parent_process, typelist=",".join([str(x) for x in ptypes]))
     return session.query(Process).from_statement(text(query)).all()
 
 def get_children_processes(session, parent_process, ptypes, sample=None, orderby=None):
-    """returns wll the processes that are found in the children of parent_process 
+    """returns all the processes that are found in the children of parent_process
     AND are of type ptypes
 
     :param session: the current SQLAlchemy session to the db
@@ -221,3 +221,73 @@ def get_children_processes(session, parent_process, ptypes, sample=None, orderby
 
     query="{} union {};".format(''.join(qar1), ''.join(qar2)).format(parent=parent_process, typelist=",".join([str(x) for x in ptypes]))
     return session.query(Process).from_statement(text(query)).all()
+
+
+def get_all_steps_for_workflow(session, workflow):
+    """returns all the steps used in a workflow in order
+
+    :param session: the current SQLAlchemy session to the db
+    :param workflow: the id of the workflow
+    :returns: List of steps in order in a workflow. The fields returned are protocolstep name, protocolstep id,
+                protocol name and stageindex which gives the order of the step in the workflow.
+
+    """
+    query = f"select pst.name, pst.stepid, lp.protocolname, stg.stageindex \
+           from labworkflow lwf, workflowsection ws, labprotocol lp, protocolstep pst, stage stg \
+           where ws.workflowid=lwf.workflowid and ws.protocolid=lp.protocolid and lp.protocolid=pst.protocolid \
+           and ws.sectionid=stg.membershipid and pst.stepid=stg.stepid \
+           and lwf.workflowname='{workflow}' \
+           order by stg.stageindex;"
+
+    return session.execute(text(query)).all()
+
+
+def get_all_samples_in_a_workflow(session, workflow):
+    """returns all the samples waiting in a protocolstep in a workflow
+
+    :param session: the current SQLAlchemy session to the db
+    :param workflow: the id of the workflow
+    :returns: List of samples in a workflow. The fields returned are artifactid, samplename, stepid of the protocolstep,
+                projectid, generatedbyid
+    """
+
+    query = f"select distinct(st.artifactid), sa.name, sa.sampleid, stg.stepid, sa.projectid, st.generatedbyid \
+              from stagetransition st, stage stg, workflowsection wfs, protocolstep pst, labprotocol lpt, \
+                labworkflow lwf, artifact_sample_map asm, sample sa \
+              where st.stageid=stg.stageid and stg.membershipid=wfs.sectionid \
+              and wfs.workflowid=lwf.workflowid and wfs.protocolid=lpt.protocolid \
+              and st.artifactid=asm.artifactid and asm.processid=sa.processid and st.completedbyid is null \
+              and lwf.workflowstatus='ACTIVE' and lwf.workflowname='{workflow}';"
+
+    return session.execute(text(query)).all()
+
+
+def get_udfs_from_sample(session, sampleid, udf_list):
+    """returns all values of samples udfs in the udf_list
+
+    :param session: the current SQLAlchemy session to the db
+    :param sampleid: sampleid from sample table
+    :param udf_list: the list of udf names to be searched
+    :returns: List of sample udf values
+    """
+    query = f"select udfname, udfvalue, udfunitlabel \
+              from sample_udf_view \
+              where sampleid={sampleid} and udfname in {tuple(udf_list)};"
+
+    return session.execute(text(query)).all()
+
+
+def get_udfs_from_step(session, sampleid, stepid, udf_list):
+    """returns all values of udfs of a sample from a particular step in a protocol.
+
+    :param session: the current SQLAlchemy session to the db
+    :param sampleid: sampleid from sample table
+    :param stepid: the id of the protocolstep
+    :param udf_list: the name of the udf to be retrieved
+    """
+    query = f"select udfname, udfvalue, udfunitlabel \
+            from artifact_udf_view auv, protocolstep pst, sample sa, processoutputtype pot, artifact art \
+            where pst.processtypeid=pot.processtypeid and pot.typeid=art.processoutputtypeid and sa.name=art.name \
+            and art.artifactid=auv.artifactid and pst.stepid={stepid} and sa.sampleid={sampleid} and auv.udfname in {tuple(udf_list)};"
+
+    return session.execute(text(query)).all()
