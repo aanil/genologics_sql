@@ -311,8 +311,9 @@ def get_udfs_from_(session, projectid, udf_list):
     if udf_list:
         add_udf_to_query = f" and udfname in {tuple(udf_list)}"
 
-    query = f"select udfname, udfvalue, udfunitlabel \
-              from entity_udf_view \
-              where attachtoid={projectid}{add_udf_to_query};"
+    query = f"select euv.udfname, euv.udfvalue, euv.udfunitlabel, pr.name \
+              from entity_udf_view euv, project pr \
+              where euv.attachtoid=pr.projectid and
+              euv.attachtoid={projectid}{add_udf_to_query};"
 
     return session.execute(text(query)).all()
