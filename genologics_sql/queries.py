@@ -268,7 +268,7 @@ def get_udfs_from_sample(session, sampleid, udf_list):
 
     :param session: the current SQLAlchemy session to the db
     :param sampleid: sampleid from sample table
-    :param udf_list: the list of udf names to be searched
+    :param udf_list: the list of udf names to be searched. If the list is empty or None, all UDFs are returned.
     :returns: List of sample udf values
     """
     add_udf_to_query = ""
