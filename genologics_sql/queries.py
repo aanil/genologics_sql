@@ -263,21 +263,26 @@ def get_all_samples_in_a_workflow(session, workflow):
 
 
 def get_udfs_from_sample(session, sampleid, udf_list):
-    """returns all values of samples udfs in the udf_list
+    """returns all values from the given list of udfs which are directly connected to a sample.
+        It does not return the udfs from protocol steps.
 
     :param session: the current SQLAlchemy session to the db
     :param sampleid: sampleid from sample table
     :param udf_list: the list of udf names to be searched
     :returns: List of sample udf values
     """
+    add_udf_to_query = ""
+    if udf_list:
+        add_udf_to_query = f" and udfname in {tuple(udf_list)}"
+
     query = f"select udfname, udfvalue, udfunitlabel \
               from sample_udf_view \
-              where sampleid={sampleid} and udfname in {tuple(udf_list)};"
+              where sampleid={sampleid}{add_udf_to_query};"
 
     return session.execute(text(query)).all()
 
 
-def get_udfs_from_step(session, sampleid, stepid, udf_list):
+def get_sample_udfs_from_step(session, sampleid, stepid, udf_list):
     """returns all values of udfs of a sample from a particular step in a protocol.
 
     :param session: the current SQLAlchemy session to the db
