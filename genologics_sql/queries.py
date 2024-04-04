@@ -227,7 +227,7 @@ def get_all_steps_for_workflow(session, workflow):
     """returns all the steps used in a workflow in order
 
     :param session: the current SQLAlchemy session to the db
-    :param workflow: the id of the workflow
+    :param workflow: the name of the workflow
     :returns: List of steps in order in a workflow. The fields returned are protocolstep name, protocolstep id,
                 protocol name and stageindex which gives the order of the step in the workflow.
 
@@ -294,5 +294,25 @@ def get_sample_udfs_from_step(session, sampleid, stepid, udf_list):
             from artifact_udf_view auv, protocolstep pst, sample sa, processoutputtype pot, artifact art \
             where pst.processtypeid=pot.processtypeid and pot.typeid=art.processoutputtypeid and sa.name=art.name \
             and art.artifactid=auv.artifactid and pst.stepid={stepid} and sa.sampleid={sampleid} and auv.udfname in {tuple(udf_list)};"
+
+    return session.execute(text(query)).all()
+
+
+def get_udfs_from_(session, projectid, udf_list):
+    """returns all values from the given list of udfs which are directly connected to a sample.
+        It does not return the udfs from protocol steps.
+
+    :param session: the current SQLAlchemy session to the db
+    :param projectid: projectid from project table
+    :param udf_list: the list of udf names to be searched. If the list is empty or None, all UDFs are returned.
+    :returns: List of project udf values
+    """
+    add_udf_to_query = ""
+    if udf_list:
+        add_udf_to_query = f" and udfname in {tuple(udf_list)}"
+
+    query = f"select udfname, udfvalue, udfunitlabel \
+              from entity_udf_view \
+              where attachtoid={projectid}{add_udf_to_query};"
 
     return session.execute(text(query)).all()
