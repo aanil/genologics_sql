@@ -298,8 +298,8 @@ def get_sample_udfs_from_step(session, sampleid, stepid, udf_list):
     return session.execute(text(query)).all()
 
 
-def get_udfs_from_(session, projectid, udf_list):
-    """returns all values from the given list of udfs which are directly connected to a sample.
+def get_udfs_from_project(session, projectid, udf_list):
+    """returns all values from the given list of udfs which are directly connected to a project.
         It does not return the udfs from protocol steps.
 
     :param session: the current SQLAlchemy session to the db
@@ -315,5 +315,20 @@ def get_udfs_from_(session, projectid, udf_list):
               from entity_udf_view euv, project pr \
               where euv.attachtoid=pr.projectid and
               euv.attachtoid={projectid}{add_udf_to_query};"
+
+    return session.execute(text(query)).all()
+
+
+def get_reagentlabel_for_sample(session, sampleid):
+    """returns the reagentlabel for a sample
+
+    :param session: the current SQLAlchemy session to the db
+    :param sampleid: sampleid from sample table
+    :returns: reagentlabel for the sample
+    """
+    query = f"select distinct(rl.name) \
+              from reagentlabel rl, artifact_label_map alm, sample sa, artifact art \
+              where alm.labelid=rl.labelid and art.artifactid=alm.artifactid \
+              and sa.name=art.name and sa.sampleid={sampleid};"
 
     return session.execute(text(query)).all()
