@@ -273,7 +273,7 @@ def get_udfs_from_sample(session, sampleid, udf_list):
     """
     add_udf_to_query = ""
     if udf_list:
-        add_udf_to_query = f" and udfname in {tuple(udf_list)}"
+        add_udf_to_query = " and udfname in ('{}')".format("', '".join(udf_list))
 
     query = f"select udfname, udfvalue, udfunitlabel \
               from sample_udf_view \
@@ -290,10 +290,11 @@ def get_sample_udfs_from_step(session, sampleid, stepid, udf_list):
     :param stepid: the id of the protocolstep
     :param udf_list: the name of the udf to be retrieved
     """
+    udf_list_str= " ('{}')".format("', '".join(udf_list))
     query = f"select udfname, udfvalue, udfunitlabel \
             from artifact_udf_view auv, protocolstep pst, sample sa, processoutputtype pot, artifact art \
             where pst.processtypeid=pot.processtypeid and pot.typeid=art.processoutputtypeid and sa.name=art.name \
-            and art.artifactid=auv.artifactid and pst.stepid={stepid} and sa.sampleid={sampleid} and auv.udfname in {tuple(udf_list)};"
+            and art.artifactid=auv.artifactid and pst.stepid={stepid} and sa.sampleid={sampleid} and auv.udfname in {udf_list_str};"
 
     return session.execute(text(query)).all()
 
@@ -309,7 +310,7 @@ def get_udfs_from_project(session, projectid, udf_list):
     """
     add_udf_to_query = ""
     if udf_list:
-        add_udf_to_query = f" and udfname in {tuple(udf_list)}"
+        add_udf_to_query = " and udfname in ('{}')".format("', '".join(udf_list))
 
     query = f"select euv.udfname, euv.udfvalue, euv.udfunitlabel, pr.name \
               from entity_udf_view euv, project pr \
