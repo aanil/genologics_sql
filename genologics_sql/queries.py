@@ -313,7 +313,7 @@ def get_udfs_from_project(session, projectid, udf_list):
 
     query = f"select euv.udfname, euv.udfvalue, euv.udfunitlabel, pr.name \
               from entity_udf_view euv, project pr \
-              where euv.attachtoid=pr.projectid and
+              where euv.attachtoid=pr.projectid and \
               euv.attachtoid={projectid}{add_udf_to_query};"
 
     return session.execute(text(query)).all()
