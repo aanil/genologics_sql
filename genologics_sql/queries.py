@@ -256,7 +256,7 @@ def get_all_samples_in_a_workflow(session, workflow):
                 labworkflow lwf, artifact_sample_map asm, sample sa \
               where st.stageid=stg.stageid and stg.membershipid=wfs.sectionid \
               and wfs.workflowid=lwf.workflowid and wfs.protocolid=lpt.protocolid \
-              and st.artifactid=asm.artifactid and asm.processid=sa.processid and st.completedbyid is null \
+              and st.artifactid=asm.artifactid and asm.processid=sa.processid and st.workflowrunid > 0 \
               and lwf.workflowstatus='ACTIVE' and lwf.workflowname='{workflow}';"
 
     return session.execute(text(query)).all()
@@ -333,3 +333,44 @@ def get_reagentlabel_for_sample(session, sampleid):
               and sa.name=art.name and sa.sampleid={sampleid};"
 
     return session.execute(text(query)).all()
+
+
+def get_currentstep_protocol_for_sample(session, sampleid):
+    """returns the current protocolstep and protocol for a sample
+
+    :param session: the current SQLAlchemy session to the db
+    :param sampleid: sampleid from sample table
+    :returns: protocolstep id, sample name, sample id, artifact id, protocol name
+    """
+    query =  f"select distinct(stg.stepid), sa.name, sa.sampleid, asm.artifactid, lp.protocolname \
+              from sample sa, stage stg, stagetransition st, artifact_sample_map asm, labprotocol lp, workflowsection ws \
+              where st.stageid=stg.stageid and st.artifactid=asm.artifactid and asm.processid=sa.processid \
+              and st.completedbyid is null and st.workflowrunid>0 and stg.membershipid=ws.sectionid \
+              and ws.protocolid=lp.protocolid and sa.sampleid={sampleid};"
+
+    return session.execute(text(query)).all()
+
+
+def get_protocolstepname(session, stepid):
+    """returns the name of the protocolstep
+
+    :param session: the current SQLAlchemy session to the db
+    :param stepid: the id of the protocolstep
+    :returns: protocolstep name
+    """
+    query = f"select name from protocolstep where stepid={stepid};"
+
+    return session.execute(text(query)).all()
+
+# 'sample_status': {'<Protocol name1>': {'<Sample name1>': ['<stepname1>']},
+#                     '<Protocol name2>': {'<Sample name1>': []}
+#                     }
+
+
+# select sa.name, sa.sampleid, asm.artifactid, stg.stepid from sample sa inner join artifact_sample_map asm on sa.processid=asm.processid inner join stagetransition st on st.artifactid=asm.artifactid 
+# inner join stage stg on st.stageid=stg.stageid inner join samplecheckout sc on sc.artifactid=asm.artifactid
+# where sa.sampleid=1;
+
+# select sc.artifactid, sc.stepid from samplecheckout sc, artifact_sample_map asm, sample sa, stagetransition st where sc.artifactid=asm.artifactid and asm.processid=sa.processid and asm.artifactid=st.artifactid and st.workflowrunid>0 and sa.sampleid=1
+
+# select sc.artifactid, sc.stepid from samplecheckout sc, artifact_sample_map asm, sample sa, stagetransition st where sc.artifactid=asm.artifactid and asm.processid=sa.processid and asm.artifactid=st.artifactid and st.workflowrunid>0 and and stg.membershipid=ws.sectionid and sa.sampleid=1057687 group by sc.artifactid, sc.stepid;
