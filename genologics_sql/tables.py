@@ -409,7 +409,7 @@ class Artifact(Base):
     compoundartifactid= Column(Integer)
     outputindex =       Column(Integer)
 
-    samples = relationship("Sample", secondary = artifact_sample_map, backref="artifacts")
+    samples = relationship("Sample", secondary = artifact_sample_map, back_populates="artifact")
     ancestors = relationship("Artifact", secondary = artifact_ancestor_map,
                 primaryjoin=artifactid==artifact_ancestor_map.c.artifactid,
                 secondaryjoin=artifactid==artifact_ancestor_map.c.ancestorartifactid)
@@ -1079,7 +1079,7 @@ class Principals(Base):
     researcherid =      Column(Integer, ForeignKey('researcher.researcherid'))
     locked =            Column(Boolean)
 
-    researcher=relationship("Researcher")
+    researcher=relationship("Researcher", overlaps="submitter")
 
     def __repr__(self):
         return "<Principals(principalid={}, username={}, researcherid={})>".format(self.principalid, self.username, self.researcherid)
