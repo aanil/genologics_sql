@@ -336,18 +336,30 @@ def get_reagentlabel_for_sample(session, sampleid):
 
 
 def get_currentsteps_protocol_for_sample(session, sampleid):
-    """returns the current protocolstep and protocol for a sample
+    """returns the current protocolstep and if it is queued or worked on in that step for a sample
 
     :param session: the current SQLAlchemy session to the db
     :param sampleid: sampleid from sample table
-    :returns: all protocolstep ids a sample is in
+    :returns: all protocolstep ids a sample is in and whether the sample is queued or worked on in that step
     """
-    query = f"select distinct(sc.stepid) \
-              from samplecheckout sc, artifact_sample_map asm, sample sa, stagetransition st \
-              where sc.artifactid=asm.artifactid and asm.processid=sa.processid and asm.artifactid=st.artifactid \
-              and st.workflowrunid>0 and sa.sampleid={sampleid};"
+    query = """
+        SELECT DISTINCT
+            COALESCE(stg.stepid, sc.stepid) AS stepid,
+            CASE
+                WHEN sc.stepid <> stg.stepid THEN 'queued'
+                ELSE 'in-step'
+            END AS status
+        FROM stage stg
+        JOIN stagetransition st ON stg.stageid = st.stageid
+        JOIN artifact_sample_map asm ON asm.artifactid = st.artifactid
+        JOIN sample sa ON sa.processid = asm.processid
+        JOIN samplecheckout sc ON sc.artifactid = asm.artifactid
+        WHERE st.workflowrunid > 0
+          AND sa.sampleid = :sampleid;
+    """
 
-    return session.execute(text(query)).all()
+    # Execute query with parameterized sampleid
+    return session.execute(text(query), {'sampleid': sampleid}).all()
 
 
 def get_protocolstep_details(session, stepid):
