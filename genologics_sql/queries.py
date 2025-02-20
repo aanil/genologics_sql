@@ -353,8 +353,9 @@ def get_currentsteps_protocol_for_sample(session, sampleid):
         JOIN stagetransition st ON stg.stageid = st.stageid
         JOIN artifact_sample_map asm ON asm.artifactid = st.artifactid
         JOIN sample sa ON sa.processid = asm.processid
-        JOIN samplecheckout sc ON sc.artifactid = asm.artifactid
+        LEFT JOIN samplecheckout sc ON sc.artifactid = asm.artifactid
         WHERE st.workflowrunid > 0
+          AND (stg.stepid IS NOT NULL OR sc.stepid IS NOT NULL)
           AND sa.sampleid = :sampleid;
     """
 
