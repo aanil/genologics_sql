@@ -346,8 +346,14 @@ def get_currentsteps_protocol_for_sample(session, sampleid):
         SELECT DISTINCT
             COALESCE(stg.stepid, sc.stepid) AS stepid,
             CASE
-                WHEN sc.stepid <> stg.stepid THEN 'queued'
-                ELSE 'in-step'
+                WHEN sc.stepid IS NOT NULL AND stg.stepid IS NULL THEN 'in-step'
+                WHEN sc.stepid IS NULL AND stg.stepid IS NOT NULL THEN 'queued'
+                WHEN stg.stepid IS NOT NULL AND sc.stepid IS NOT NULL THEN
+                CASE
+                    WHEN stg.stepid <> sc.stepid THEN 'queued'
+                    ELSE 'in-step'
+                END
+                ELSE 'unknown'
             END AS status
         FROM stage stg
         JOIN stagetransition st ON stg.stageid = st.stageid
